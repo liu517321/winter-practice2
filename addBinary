@@ -1,0 +1,60 @@
+class Solution {
+    public String addBinary(String a, String b) {
+        char[] aa = a.toCharArray();
+	        char[] bb = b.toCharArray();
+	        char[] cc = new char[a.length()>b.length()?a.length()+1:b.length()+1];
+	        int na=aa.length-1;
+	        int nb=bb.length-1;
+	        int len = cc.length-1;
+	        char t='0';
+	        while(na>=0&&nb>=0) {       	
+	        	if((Integer.parseInt(aa[na]+"")+Integer.parseInt(bb[nb]+"")+Integer.parseInt(t+""))==0) {
+	        		cc[len--]='0';
+	        		na--;
+	        		nb--;
+	        	}else if((Integer.parseInt(aa[na]+"")+Integer.parseInt(bb[nb]+"")+Integer.parseInt(t+""))==1) {
+	        		cc[len--]='1';
+	        		t='0';
+	        		na--;
+	        		nb--;
+	        	}else if((Integer.parseInt(aa[na]+"")+Integer.parseInt(bb[nb]+"")+Integer.parseInt(t+"")==2)) {
+	        		cc[len--]='0';	
+	        		t='1'; 
+	        		na--;
+	        		nb--;
+	        	}else {
+	        		na--;
+	        		nb--;
+	        		cc[len--]='1';
+	        		t='1';
+	        	}
+	        }
+	        while(na>=0) {
+	        	if(t=='1'&&aa[na]=='1') {
+	        		na--;
+	        		cc[len--]='0';
+	        	}else if(t=='1'&&aa[na]=='0') {
+	        		na--;
+	        		cc[len--]='1';
+	        		t='0';
+	        	}else {
+	        		cc[len--]=aa[na--];
+	        	}
+	        }
+	        while(nb>=0) {
+	        	if(t=='1'&&bb[nb]=='1') {
+	        		nb--;
+	        		cc[len--]='0';
+	        	}else if(t=='1'&&bb[nb]=='0') {
+	        		nb--;
+	        		cc[len--]='1';
+	        		t='0';
+	        	}else {
+	        		cc[len--]=bb[nb--];
+	        	}
+	        }
+	        if(t=='1')
+	        	cc[0]='1';
+			return String.valueOf(cc).trim();
+    }
+}
