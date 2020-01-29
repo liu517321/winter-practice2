@@ -1,0 +1,18 @@
+class Solution {
+    public int[] plusOne(int[] digits) {
+        int len = digits.length;
+        int i = len-1;
+        digits[i] += 1;
+        if (digits[i] > 9){  
+            while(i > 0 && digits[i] > 9){
+                digits[i] = 0;
+                digits[--i] += 1;
+            }
+            if (i == 0 && digits[i] > 9){   
+                digits = new int[len+1];
+                digits[0] = 1;
+            }
+        }
+        return digits;
+    }
+}
