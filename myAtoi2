@@ -1,0 +1,32 @@
+public int myAtoi(String str) {
+		if (str.isEmpty())
+			return 0;
+		char[] mychar = str.toCharArray();
+		long ans = 0;
+		int index = 0, flag = 1, n = str.length();
+		//排除字符串开头的空格元素
+		while (index < n && mychar[index] == ' ') {
+			index++;
+		}
+		//排除空格后判断首字符是+还是-还是都不是
+		if (index < n && mychar[index] == '+') {
+			index++;
+		} else if (index < n && mychar[index] == '-') {
+			index++;
+			flag = -1;
+		}
+		//重点：只管是数字的时候，其余取0
+		while (index < n && (mychar[index] >= '0' && mychar[index] <= '9')) {
+			if (ans != (int) ans) {//超出int范围
+				return (flag == 1) ? Integer.MAX_VALUE : Integer.MIN_VALUE;//提前结束
+			}
+			ans = ans * 10 + mychar[index++] - '0';
+		}
+
+		if (ans != (int) ans) {
+			return (flag == 1) ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+		}
+
+		return (int) (ans * flag);
+
+	}
