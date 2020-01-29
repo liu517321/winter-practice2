@@ -1,0 +1,27 @@
+class Solution {
+    public int thirdMax(int[] nums) {
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        if (nums.length == 2) {
+            return Math.max(nums[0], nums[1]);
+        }
+        Integer max1 = null;
+        Integer max2 = null;
+        Integer max3 = null;
+        for (int t = 0; t < nums.length; t++) {
+            if (max1 == null || (nums[t] > max1)) {
+                max3 = max2;
+                max2 = max1;
+                max1 = nums[t];
+            } else if ((max2 == null || nums[t] > max2) && nums[t] < max1) {
+                max3 = max2;
+                max2 = nums[t];
+            } else if ((max3 == null || nums[t] > max3) && max2 != null && nums[t] < max2) {
+                max3 = nums[t];
+            }
+        }
+        return max3 != null ? max3 : max1;
+
+    }
+}
